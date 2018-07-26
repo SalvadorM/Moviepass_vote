@@ -1,0 +1,18 @@
+/*
+  Graph toggle
+*/
+.graphSection{
+  overflow: hidden;
+  height: 0px;
+  transition: 200ms ease-out;
+}
+#chartButton{
+  margin-bottom: 20px;
+}
+.toggleGraph {
+  height: 300px;
+}
+.col-md-3{
+  opacity: 0;
+  transition: 200ms ease-in;
+}
