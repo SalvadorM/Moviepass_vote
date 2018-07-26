@@ -3,7 +3,7 @@
 */
 .graphSection{
   overflow: hidden;
-  height: 0px;
+  height: 0;
   transition: 200ms ease-out;
 }
 #chartButton{
@@ -15,4 +15,7 @@
 .col-md-3{
   opacity: 0;
   transition: 200ms ease-in;
+}
+.showPoster {
+  opacity: 1;
 }

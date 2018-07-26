@@ -1,7 +1,7 @@
-
 // Request movieDB for 20 current films that are showing
 //and puts them in the object argument
-function appendMovies (moviesArr) {
+function setMovies () {
+  var moviesArr = [];
   $.getJSON("https://api.themoviedb.org/3/movie/now_playing?api_key=73e9c32f5e534d529e1537f3b4f4ae38&language=en-US&page=1",
     function(data) {
       $.each(data.results, function(index, value){
@@ -15,36 +15,28 @@ function appendMovies (moviesArr) {
           'id': value.id,
           'poster': url
         };
+         moviesArr.sort(function(a, b) { return b.vote - a.vote; });
         moviesArr.push(curr);
         $('.row').append('<div class="col-md-3"><div class="card"><img class="card-img-top" src="' + curr.poster + '"alt="movies"> <div class="card-body"><h5 class="card-title">'+ curr.title +'</h5><button name="movie" type="submit" class="btn btn-outline-primary mb" id="'+ curr.id +'">Vote</button></div><div class="card-footer"><small class="text-muted">Rating: '+ curr.vote +'</small></div></div> ');
-      });
-  });
-  moviesArr.sort(function(a,b){
-    return a.vote - b.vote;
-  });
-}
-$(window).on('load',function(){
-  //create array with the current movies
-  let moviesDB = [];
-  appendMovies(moviesDB);
 
-  //Display all the movies
+      });
+  }).done(test);
+  return moviesArr;
+}
+
+//set the rest of the page after the we get the information from movieDB api
+function test(){
+  //show all cards after the cards were loaded
   $('.col-md-3').each(function(e){
-    console.log('test');
     setTimeout(function(){
       $('.col-md-3').eq(e).css('opacity','1');
     }, 100 * (e+1));
   });
 
-  //Client javascript
-  $('#chartButton').click(function() {
-    var graphSec = $('.graphSection');
-    graphSec.toggleClass('toggleGraph')
-  });
-
   //Add event listener to all buttons
   //and send POST to poll
   var form = $('button.mb');
+
   form.on('click', function(){
      const choice = this.id;
      const data = { movie: choice };
@@ -61,19 +53,16 @@ $(window).on('load',function(){
       .catch(err => console.log(err));
   });
 
-  //Cut movies to top 10
-  let topMovies = moviesDB;
-  topMovies = topMovies.slice(0,10);
-
   //Add the movies to dataPoints, to create graph
-  let dataPoints = [];
-  $.each(topMovies, function(key, value){
+  var dataPoints = [];
+  $.each(dataDB, function(key, value){
     dataPoints.push({
       label: value.title,
      y: 0,
       id: value.id
        });
   });
+
 
   //Get the data from database
   fetch('https://moviepasspoll.herokuapp.com/poll')
@@ -96,7 +85,7 @@ $(window).on('load',function(){
           }
         });
       });
-
+    
       //Create chart in document
       const chartCon = $('#chartContainer');
       if (chartCon) {
@@ -144,4 +133,11 @@ $(window).on('load',function(){
        });
      }
   });
+}
+
+var dataDB = setMovies();
+
+$('#chartButton').click(function() {
+  var graphSec = $('.graphSection');
+  graphSec.toggleClass('toggleGraph')
 });
