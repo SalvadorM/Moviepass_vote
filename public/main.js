@@ -1,8 +1,3 @@
-//Client javascript
-$('#chartButton').click(function() {
-  var graphSec = $('.graphSection');
-  graphSec.toggleClass('toggleGraph')
-});
 
 // Request movieDB for 20 current films that are showing
 //and puts them in the object argument
@@ -40,6 +35,12 @@ $(document).ready(function(){
     }, 100 * (e+1));
   });
 
+  //Client javascript
+  $('#chartButton').click(function() {
+    var graphSec = $('.graphSection');
+    graphSec.toggleClass('toggleGraph')
+  });
+
   //Add event listener to all buttons
   //and send POST to poll
   var form = $('button.mb');
@@ -74,7 +75,7 @@ $(document).ready(function(){
   });
 
   //Get the data from database
-  fetch('http://localhost:3000/poll')
+  fetch('https://moviepasspoll.herokuapp.com/poll')
     .then(res => res.json())
     .then(data => {
 
