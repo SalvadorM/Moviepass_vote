@@ -23,7 +23,7 @@ function appendMovies (moviesArr) {
     return a.vote - b.vote;
   });
 }
-$(document).ready(function(){
+
   //create array with the current movies
   let moviesDB = [];
   appendMovies(moviesDB);
@@ -144,4 +144,3 @@ $(document).ready(function(){
        });
      }
   });
-});
