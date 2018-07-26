@@ -21,7 +21,7 @@ function appendMovies (moviesArr) {
           'poster': url
         };
         moviesArr.push(curr);
-        $('.row').append('<div class="col-xs-3 col-md-3"><div class="card"><img class="card-img-top" src="' + curr.poster + '"alt="movies"> <div class="card-body"><h5 class="card-title">'+ curr.title +'</h5><button name="movie" type="submit" class="btn btn-outline-primary mb" id="'+ curr.id +'">Vote</button></div><div class="card-footer"><small class="text-muted">Rating: '+ curr.vote +'</small></div></div> ');
+        $('.row').append('<div class="col-md-3"><div class="card"><img class="card-img-top" src="' + curr.poster + '"alt="movies"> <div class="card-body"><h5 class="card-title">'+ curr.title +'</h5><button name="movie" type="submit" class="btn btn-outline-primary mb" id="'+ curr.id +'">Vote</button></div><div class="card-footer"><small class="text-muted">Rating: '+ curr.vote +'</small></div></div> ');
       });
   });
   moviesArr.sort((a,b) => a.vote - b.vote);
@@ -37,9 +37,6 @@ $(document).ready(function(){
   $('.col-md-3').each(function(e){
     setTimeout(function(){
       $('.col-md-3').eq(e).css('opacity','1');
-
-
-
     }, 100 * (e+1));
   });
 
