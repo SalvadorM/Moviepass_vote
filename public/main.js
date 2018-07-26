@@ -50,7 +50,7 @@ $(document).ready(function(){
      const choice = this.id;
      const data = { movie: choice };
 
-     fetch('http://localhost:3000/poll', {
+     fetch('https://moviepasspoll.herokuapp.com/poll', {
        method: 'post',
        body: JSON.stringify(data),
        headers: new Headers({
