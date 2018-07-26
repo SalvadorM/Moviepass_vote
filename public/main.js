@@ -30,6 +30,7 @@ $(document).ready(function(){
 
   //Display all the movies
   $('.col-md-3').each(function(e){
+    console.log('test');
     setTimeout(function(){
       $('.col-md-3').eq(e).css('opacity','1');
     }, 100 * (e+1));
