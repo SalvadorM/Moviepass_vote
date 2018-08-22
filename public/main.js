@@ -49,7 +49,7 @@ function test(){
        })
      })
       .then(function(res) {
-        res.json()})
+        return res.json()})
       .then(function(data){
         console.log(data)})
       .catch(function(err){
