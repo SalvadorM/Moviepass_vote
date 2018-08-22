@@ -69,15 +69,17 @@ function test(){
 
   //Get the data from database
   fetch('https://moviepasspoll.herokuapp.com/poll')
-    .then(function(res){res.json()})
+    .then(function(res){ return res.json()})
     .then(function(data){
-
       const votesAll = data.votes;
       //get the movies that have votes
       //and creates array with all ID : votes
-      const voteCounts = votesAll.reduce(
-        (acc, vote) =>
-          ((acc[vote.movie] = (acc[vote.movie] || 0) + vote.votes), acc), {});
+
+      const voteCounts = votesAll.reduce(function(acc, vote){
+        acc[vote.movie] = (acc[vote.movie] || 0) + vote.votes
+        return acc;
+      }, {});
+
 
       //Add in the the information from the database if the movie has votes
       $.each(dataPoints, function(key, val){
