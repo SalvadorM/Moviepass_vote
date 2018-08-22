@@ -41,19 +41,10 @@ function test(){
      const choice = this.id;
      const data = { movie: choice };
 
-     fetch('https://moviepasspoll.herokuapp.com/poll', {
-       method: 'POST',
-       body: JSON.stringify(data),
-       headers: new Headers({
-         'Content-Type': 'application/json'
-       })
-     })
-      .then(function(res) {
-        return res.json()})
-      .then(function(data){
-        console.log(data)})
-      .catch(function(err){
-        console.log(err)});
+    $.post('https://moviepasspoll.herokuapp.com/poll', data, function(data, status){
+      console.log(data);
+    });
+    
   });
 
   //Add the movies to dataPoints, to create graph
