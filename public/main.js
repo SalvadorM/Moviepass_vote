@@ -125,7 +125,7 @@ function test(){
        //we map through dataPoints and see which ID matches the data.id
        //if the movie is in top 10, then we add the vote to dataPoints
        channel.bind('movie-vote', function(data) {
-         dataPoints = dataPoints.map(x => {
+         dataPoints = dataPoints.map(function(x){
            if(x.id == data.movie){
              x.y += data.votes;
              return x;
