@@ -50,8 +50,10 @@ function test(){
      })
       .then(function(res) {
         res.json()})
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+      .then(function(data){
+        console.log(data)})
+      .catch(function(err){
+        console.log(err)});
   });
 
   //Add the movies to dataPoints, to create graph
@@ -67,8 +69,8 @@ function test(){
 
   //Get the data from database
   fetch('https://moviepasspoll.herokuapp.com/poll')
-    .then(res => res.json())
-    .then(data => {
+    .then(function(res){res.json()})
+    .then(function(data){
 
       const votesAll = data.votes;
       //get the movies that have votes
