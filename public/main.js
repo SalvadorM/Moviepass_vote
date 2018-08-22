@@ -48,7 +48,8 @@ function test(){
          'Content-Type': 'application/json'
        })
      })
-      .then(res => res.json())
+      .then(function(res) {
+        res.json()})
       .then(data => console.log(data))
       .catch(err => console.log(err));
   });
@@ -85,7 +86,7 @@ function test(){
           }
         });
       });
-    
+
       //Create chart in document
       const chartCon = $('#chartContainer');
       if (chartCon) {

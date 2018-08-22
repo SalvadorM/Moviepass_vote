@@ -30,6 +30,6 @@ app.listen(port, () => console.log('Server started on port: ' + port));
 //mongoose set up
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://salvador:1256rs@ds117848.mlab.com:17848/movie_poll')
+mongoose.connect('mongodb://salvador:1256rs@ds117848.mlab.com:17848/movie_poll', { useNewUrlParser: true })
   .then(() => console.log('Connect to database'))
   .catch(err => console.log(err));
