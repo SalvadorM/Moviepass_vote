@@ -33,7 +33,6 @@ router.post('/', (req, res)=> {
       votes: vote.votes,
       movie: vote.movie
     });
-
     return res.json({success: true, message: 'Vote submitted'});
   });
 });

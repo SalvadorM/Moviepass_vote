@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+  h1.text-center Top 10 Movies out in theaters
+  #form-sec.row
+    each movie in movies
+      .col-6.col-xs-4.col-md-3
+        .card
+          img.card-img-top(src= movie.poster, alt= "Movie Poster")
+          .card-body
+            h5.card-title= movie.title
+            button.btn.btn-outline-primary.mb(name='movie', type='submit', id= movie.id, target='#voted') Vote
+          .card-footer
+            small.text-muted= 'Rating: ' + movie.vote
+
+          

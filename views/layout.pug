@@ -1,0 +1,23 @@
+doctype html
+html(lang='en', dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title MOVIEDB API
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+    link(rel='stylesheet', type='text/css', href='./styles.css')
+    script(src='https://code.jquery.com/jquery-3.3.1.js', integrity='sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=', crossorigin='anonymous')
+  body.bg-light
+    .container.text-center
+      h1.display-3 MovieDB Current Movies
+      button#chartButton.btn.btn-info(type='button') Movie Chart Results
+      .graphSection
+        #chartContainer.chartSection(style='height: 300px; width: 100%; margin-bottom: 100px')
+      #voted.alert.alert-success(style='display:none;')
+        strong Success!
+        |   You can vote again!
+
+      block content
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pusher/4.2.2/pusher.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js')
+    script(src='./main.js')

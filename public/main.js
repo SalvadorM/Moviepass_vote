@@ -1,38 +1,14 @@
-// Request movieDB for 20 current films that are showing
-//and puts them in the object argument
-function setMovies () {
-  var moviesArr = [];
-  $.getJSON("https://api.themoviedb.org/3/movie/now_playing?api_key=73e9c32f5e534d529e1537f3b4f4ae38&language=en-US&page=1",
-    function(data) {
-      $.each(data.results, function(index, value){
-        var url = 'https://image.tmdb.org/t/p/w185'+ value.poster_path;
-        var idAttr = value.id.toString();
-
-        var curr = {
-          'title': value.title,
-          'vote': value.vote_average,
-          'body': value.overview,
-          'id': value.id,
-          'poster': url
-        };
-         moviesArr.sort(function(a, b) { return b.vote - a.vote; });
-        moviesArr.push(curr);
-        $('.row').append('<div class="col-md-3"><div class="card"><img class="card-img-top" src="' + curr.poster + '"alt="movies"> <div class="card-body"><h5 class="card-title">'+ curr.title +'</h5><button name="movie" type="submit" class="btn btn-outline-primary mb" id="'+ curr.id +'">Vote</button></div><div class="card-footer"><small class="text-muted">Rating: '+ curr.vote +'</small></div></div> ');
-
-      });
-  }).done(test);
-  return moviesArr;
+function displayTY(){
+  $('html, body').animate({
+    scrollTop: $("#voted").offset().top
+  }, 1000);
+  $('#voted').fadeIn(1000);
+   setTimeout(function() {
+       $('#voted').fadeOut(1000);
+   }, 3000);
 }
 
-//set the rest of the page after the we get the information from movieDB api
-function test(){
-  //show all cards after the cards were loaded
-  $('.col-md-3').each(function(e){
-    setTimeout(function(){
-      $('.col-md-3').eq(e).css('opacity','1');
-    }, 100 * (e+1));
-  });
-
+$(function(){
   //Add event listener to all buttons
   //and send POST to poll
   var form = $('button.mb');
@@ -43,18 +19,21 @@ function test(){
 
     $.post('https://moviepasspoll.herokuapp.com/poll', data, function(data, status){
       console.log(data);
+      displayTY();
     });
-    
   });
 
   //Add the movies to dataPoints, to create graph
+  var dataDB = $('.card-body');
   var dataPoints = [];
-  $.each(dataDB, function(key, value){
-    dataPoints.push({
-      label: value.title,
-     y: 0,
-      id: value.id
-       });
+  $.each(dataDB, function(index, val){
+    var title = $(this)[0].firstChild.innerText;
+    var movID = $(this)[0].lastChild.id;
+      dataPoints.push({
+        label: title,
+        y: 0,
+        id: movID
+         });
   });
 
   $.get('https://moviepasspoll.herokuapp.com/poll', function(data, status){
@@ -125,13 +104,17 @@ function test(){
    }
   });
 
-}
+  //toggle the graph
+  $('#chartButton').click(function() {
+    var graphSec = $('.graphSection');
+    graphSec.toggleClass('toggleGraph')
+  });
 
+  //make movies animation
+  $('.col-md-3').each(function(e){
+    setTimeout(function(){
+      $('.col-md-3').eq(e).css('opacity','1');
+    }, 100 * (e+1));
+  });
 
-
-var dataDB = setMovies();
-
-$('#chartButton').click(function() {
-  var graphSec = $('.graphSection');
-  graphSec.toggleClass('toggleGraph')
 });
