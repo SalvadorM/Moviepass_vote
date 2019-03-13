@@ -10,7 +10,7 @@ const app = express();
 //mongoose set up
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://salvador:1256rs@ds117848.mlab.com:17848/movie_poll', { useNewUrlParser: true })
+mongoose.connect('------', { useNewUrlParser: true })
   .then(() => console.log('Connect to database'))
   .catch(err => console.log(err));
 
